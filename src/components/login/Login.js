@@ -74,7 +74,10 @@ function Login() {
         console.log("Web3 Version:", web3.version);
         console.log("User Address:", address);
 
-        setFormActivated(true);
+        setFormActivated(true); // Activate the form
+
+        // Continue with your logic or redirect to the authenticated area
+        //history("/home");
       } catch (error) {
         console.error("Error connecting to MetaMask:", error);
       }
