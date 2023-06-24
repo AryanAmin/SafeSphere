@@ -1,0 +1,6 @@
+.home-container{
+    width: 100%;
+    flex: 1;
+    padding: 5px 10px;
+    border: 1.5px solid var(--border-color);
+}
