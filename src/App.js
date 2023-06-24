@@ -1,4 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Fragment } from "react";
 import Home from "./components/home/Home";
 import Login from "./components/login/Login";
 import Navigation from "./components/navigation/Navigation";
@@ -30,8 +31,10 @@ function App() {
               </div>} />
           <Route
             path="/profile"
-            element={
+            element={<Fragment>
+              <Navigation />
               <ProfilePage userId={'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0'}/>
+            </Fragment>  
             }
           />
         </Routes>

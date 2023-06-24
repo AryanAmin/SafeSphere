@@ -1,0 +1,49 @@
+.wrapper {
+    display: grid;
+    gap: 10px;
+    grid-template-rows: auto 60vh auto;
+    grid-template-columns: 49% 49%;
+    justify-items: center;
+    grid-template-areas:
+      "profile-card profile-card"
+      "Crypto-distrib NFT-distrib"
+      "posts posts";
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  .profile-card{
+    grid-area: profile-card;
+    margin: 1rem 1rem;
+    width: 100%;
+  }
+  .profile-pic{
+    grid-area: profile-pic;
+    display: inline-block;
+    height: 100%;
+  }
+  .profile-pic img{
+    height: 15vh;
+    border-radius: 50px;
+  }
+  .user-name{
+    grid-area: user-name;
+    display: inline;
+    margin: 1rem;
+  }
+  .Crypto-distrib{
+    grid-area: Crypto-distrib;
+    width: 100%;
+
+  }
+  .Crypto-distrib-chart{
+    width:100%;
+    max-width:700px;
+  }
+  .NFT-distrib{
+    grid-area: NFT-distrib;
+    width: 100%;
+  }
+  .posts{
+    grid-area: posts;
+
+  }

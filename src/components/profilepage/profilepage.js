@@ -1,4 +1,15 @@
 import { useParams } from "react-router-dom";
+import './profilepage.css';
+import ProfilePic from '../../assets/images/profile-pic.jpg';
+import CryptoPieChart from "./Crypto-piechart";
+
+const userList = {
+    '0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0': {userFName: 'John',
+                                                    userLName: 'Doe',
+                                                    userProfilePicture: 'profile-pic.jpg',
+                                                    userPosts: []
+                                                },
+}
 
 function fetchUserCoinBalance(userAddress){
     const axios = require('axios');
@@ -80,13 +91,31 @@ function fetchNativeTokenPrice(){
     return coin_balance;
 }
 
-export default function Profilepage(){
+export default function Profilepage(props){
     // const userId = useParams();
     // const userBalance = fetchUserCoinBalance(userId);
     // const userERC20Balance = fetchUserERC20Balance(userId);
     // const ERC20TokenPrice = fetchTokenPrice(userERC20Balance);
     // const nativeTokenPrice = fetchNativeTokenPrice(userId);
-    
+    const userId = props.userId;
 
-    return (<div></div>);
+    return (<div class="wrapper">
+        <div class='profile-card'>
+            <div class="profile-pic">
+            <img src={ProfilePic} alt="profile-pic"></img>
+            </div>
+            <div class="user-name">
+                Jane Doe
+            </div>
+        </div>
+        <div class='Crypto-distrib'>
+            <CryptoPieChart />
+        </div>
+        <div class='NFT-distrib'>
+        Hi
+        </div>
+        <div class='posts'>
+        Hi
+        </div>
+    </div>);
 }
