@@ -28,11 +28,7 @@ const posts = [
 ];
 
 function Home() {
-<<<<<<< HEAD
-  //const [{user}] = useStateValue();
-=======
   const [{ user }] = useStateValue();
->>>>>>> e504e9b0a40baf489cabd7addb7142599a4f8270
   const history = useNavigate();
   const db = getFirestore();
   const usersRef = collection(db, "users");
@@ -64,7 +60,7 @@ function Home() {
 
   return (
     <div className="home-container">
-      {/*user*/}
+      {user}
       <h1>Main Feed</h1>
       <Posts posts={posts} onPostClick={handlePostClick} />
     </div>
