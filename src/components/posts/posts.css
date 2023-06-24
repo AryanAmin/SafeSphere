@@ -1,0 +1,22 @@
+.posts {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .post {
+    margin-bottom: 20px;
+  }
+  
+  .post h2 {
+    font-size: 20px;
+  }
+  
+  .post p {
+    font-size: 16px;
+  }
+  
+  .post .author {
+    font-size: 14px;
+  }

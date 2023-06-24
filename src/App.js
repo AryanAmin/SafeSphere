@@ -4,6 +4,7 @@ import Login from "./components/login/Login";
 import Navigation from "./components/navigation/Navigation";
 import "./App.css";
 import RecommendFollowers from "./components/recommendFollowers/RecommendFollowers";
+import PostDetails from "./components/postDetails/postDetails";
 
 function App() {
   return (
@@ -21,6 +22,11 @@ function App() {
               </div>
             }
           />
+          <Route path="/post/:id" element={<div className="components-container">
+                <Navigation />
+                <PostDetails />
+                <RecommendFollowers />
+              </div>} />
         </Routes>
       </Router>
     </div>
