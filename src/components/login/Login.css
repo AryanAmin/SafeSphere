@@ -1,62 +1,97 @@
 .login-container {
-  text-align: center;
-  margin-top: 100px;
-}
-
-.safesphere-title {
-  font-size: 48px;
-  color: #fff;
-}
-
-.sphere-animation {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 40px auto;
-  border-radius: 50%;
-  background-color: #2d2d2d; /* Update to your desired background color */
-  animation: spin 2s linear infinite;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-}
-
-.sphere-star {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #ffca28; /* Update to your desired star color */
-  width: 2px;
-  height: 2px;
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: blink 1.5s infinite;
-}
-
-@keyframes blink {
-  0% {
-    opacity: 0;
+    text-align: center;
+    margin-top: 100px;
   }
-  50% {
-    opacity: 1;
+  
+  .safesphere-title {
+    font-size: 48px;
+    color: #fff;
   }
-  100% {
-    opacity: 0;
+  
+  .sphere-animation {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 40px auto;
+    border-radius: 50%;
+    background-color: #2d2d2d; /* Update to your desired background color */
+    animation: spin 2s linear infinite;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
   }
-}
-
-.connect-button {
-  padding: 12px 24px;
-  font-size: 18px;
-  background-color: #ffca28; /* Update to your desired button color */
-  color: #2d2d2d; /* Update to your desired button text color */
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.connected-address {
-  margin-top: 20px;
-  font-size: 16px;
-  color: #fff;
-}
+  
+  .sphere-star {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffca28; /* Update to your desired star color */
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: blink 1.5s infinite;
+  }
+  
+  @keyframes blink {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  .connect-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    background-color: #ffca28; /* Update to your desired button color */
+    color: #2d2d2d; /* Update to your desired button text color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .connected-address {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #fff;
+  }
+  
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .input-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .input-field {
+    padding: 10px;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .input-field:focus {
+    outline: none;
+    border-color: #ffca28;
+  }
+  
+  .submit-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    background-color: #ffca28; /* Update to your desired button color */
+    color: #2d2d2d; /* Update to your desired button text color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

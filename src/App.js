@@ -5,13 +5,14 @@ import Navigation from "./components/navigation/Navigation";
 import "./App.css";
 import RecommendFollowers from "./components/recommendFollowers/RecommendFollowers";
 import PostDetails from "./components/postDetails/postDetails";
+import "./backend/firebase";
 
 function App() {
   return (
     <div>
       <Router>
         <Routes>
-        <Route
+          <Route
             path="/home"
             element={
               <div className="components-container">

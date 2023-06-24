@@ -1,35 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Posts from "../posts/posts";
 import { useNavigate } from "react-router";
 import { useStateValue } from "../../StateProvider";
-import { useState } from "react";
-import NewPost from "../newPost/NewPost";
+import {NewPost} from '../newPost';
+import {
+  getFirestore,
+  getDocs,
+  doc,
+  collection,
+  onSnapshot,
+} from "@firebase/firestore";
 
 const posts = [
   {
     title: "This is a post",
     body: "This is the body of the post",
     author: "John Doe",
-    cid: 456
+    cid: 456,
   },
   {
     title: "This is another post",
     body: "This is the body of another post",
     author: "Jane Doe",
-    cid: 635
+    cid: 635,
   },
 ];
 
 function Home() {
   const [{ user }] = useStateValue();
   const history = useNavigate();
+  const db = getFirestore();
+  const usersRef = collection(db, "users");
+
   const [selectedPost, setSelectedPost] = useState(null);
 
   const handlePostClick = (e, postCid) => {
     e.preventDefault();
     history(`/post/${postCid}`);
   };
+
+  useEffect(() => {
+    // const userCollectionRef = doc(collection(db, "users"), "walletAddress");
+    // onSnapshot(userCollectionRef, (doc) => {
+    //   console.log("Doc Data: ", doc.data());
+    // });
+
+    const unsubscribe = onSnapshot(usersRef, (snapshot) => {
+      const allUsers = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+      console.log("All users: ", allUsers);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <div className="home-container">
