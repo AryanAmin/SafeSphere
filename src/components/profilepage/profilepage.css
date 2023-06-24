@@ -24,7 +24,7 @@
   }
   .profile-pic img{
     height: 15vh;
-    border-radius: 50px;
+    border-radius: 30px;
   }
   .user-name{
     grid-area: user-name;
@@ -37,6 +37,8 @@
   }
   .Crypto-distrib canvas{
     height: 60vh !important;
+    margin-left: auto;
+    margin-right: auto;
   }
   .NFT-distrib{
     grid-area: NFT-distrib;
@@ -46,6 +48,7 @@
   .NFT-distrib canvas{
     height: 60vh !important;
     margin-left: auto;
+    margin-right: auto;
   }
   .posts{
     grid-area: posts;
