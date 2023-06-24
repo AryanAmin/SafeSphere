@@ -21,7 +21,7 @@ const posts = [
 ];
 
 function Home() {
-  const [{user}] = useStateValue();
+  //const [{user}] = useStateValue();
   const history = useNavigate();
   const [selectedPost, setSelectedPost] = useState(null);
 
@@ -32,7 +32,7 @@ function Home() {
 
   return (
     <div className="home-container">
-      {user}
+      {/*user*/}
       <h1>Main Feed</h1>
         <Posts posts={posts} onPostClick={handlePostClick} />
     </div>
