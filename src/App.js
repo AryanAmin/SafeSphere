@@ -4,6 +4,7 @@ import Login from "./components/login/Login";
 import Navigation from "./components/navigation/Navigation";
 import "./App.css";
 import RecommendFollowers from "./components/recommendFollowers/RecommendFollowers";
+import ProfilePage from "./components/profilepage/profilepage";
 
 function App() {
   return (
@@ -19,6 +20,12 @@ function App() {
                 <Home />
                 <RecommendFollowers />
               </div>
+            }
+          />
+          <Route
+            path="/events/:id"
+            element={
+              <ProfilePage />
             }
           />
         </Routes>
