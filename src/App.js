@@ -6,6 +6,7 @@ import "./App.css";
 import RecommendFollowers from "./components/recommendFollowers/RecommendFollowers";
 import PostDetails from "./components/postDetails/postDetails";
 import "./backend/firebase";
+import Profilepage from "./components/profilepage/profilepage";
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
             }
           />
           <Route path="/" element={<Login />} />
+          <Route path="/profile" element={
+          <Profilepage userId={'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0'}/>} />
         </Routes>
       </Router>
     </div>
