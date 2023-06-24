@@ -5,6 +5,7 @@ import Navigation from "./components/navigation/Navigation";
 import "./App.css";
 import RecommendFollowers from "./components/recommendFollowers/RecommendFollowers";
 import PostDetails from "./components/postDetails/postDetails";
+import "./backend/firebase";
 
 function App() {
   return (
@@ -31,7 +32,9 @@ function App() {
               </div>
             }
           />
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Login />
+            }
+          />
         </Routes>
       </Router>
     </div>
