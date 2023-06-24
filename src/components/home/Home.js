@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Home.css";
 import Posts from "../posts/posts";
-import PostDetails from "../postDetails/postDetails";
 import { useNavigate } from "react-router";
 import { useStateValue } from "../../StateProvider";
+import { useState } from "react";
+import NewPost from "../newPost/NewPost";
 
 const posts = [
   {
@@ -21,20 +22,22 @@ const posts = [
 ];
 
 function Home() {
-  const [{user}] = useStateValue();
+  const [{ user }] = useStateValue();
   const history = useNavigate();
   const [selectedPost, setSelectedPost] = useState(null);
 
   const handlePostClick = (e, postCid) => {
     e.preventDefault();
-    history(`/post/${postCid}`)
+    history(`/post/${postCid}`);
   };
 
   return (
     <div className="home-container">
       {user}
       <h1>Main Feed</h1>
-        <Posts posts={posts} onPostClick={handlePostClick} />
+      <NewPost />
+      <Posts posts={posts} onPostClick={handlePostClick} />
+       {/* Add the NewPost component */}
     </div>
   );
 }

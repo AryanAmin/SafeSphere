@@ -1,0 +1,43 @@
+/* NewPost.css */
+
+.new-post-container {
+    padding: 20px;
+    background-color: #0a0a0a;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .new-post-container h2 {
+    margin-bottom: 10px;
+  }
+  
+  .new-post-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .new-post-form input,
+  .new-post-form textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  
+  .new-post-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .new-post-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .new-post-form input[type="file"] {
+    margin-bottom: 10px;
+  }
+  

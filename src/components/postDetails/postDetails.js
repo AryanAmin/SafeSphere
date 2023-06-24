@@ -53,8 +53,8 @@ const PostDetails = () => {
           ) : (
             <div>No comments found.</div>
           )}
-        </div>
-      )} */}
+        </div> */}
+      {/* )} */}
     </div>
   );
 };
