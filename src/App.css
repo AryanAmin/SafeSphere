@@ -3,5 +3,5 @@
     height: 100vh;
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: 5px; 
 }

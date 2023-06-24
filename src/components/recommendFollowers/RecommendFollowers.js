@@ -4,7 +4,7 @@ import "./RecommendFollowers.css";
 function RecommendFollowers() {
   return (
     <div className="recommendedFollowers-container">
-      <h1>Follower</h1>
+      <h2>Follower</h2>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import "./Home.css";
 function Home() {
   return (
     <div className="home-container">
-      <h1>Main Feed</h1>
+      <h2>Main Feed</h2>
     </div>
   );
 }

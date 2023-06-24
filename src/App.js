@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route
-            path="/"
+            path="/home"
             element={
               <div className="components-container">
                 <Navigation />
