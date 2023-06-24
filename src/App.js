@@ -12,9 +12,8 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/"
+        <Route
+            path="/home"
             element={
               <div className="components-container">
                 <Navigation />
@@ -31,6 +30,9 @@ function App() {
                 <PostDetails />
                 <RecommendFollowers />
               </div>
+            }
+          />
+          <Route path="/" element={<Login />
             }
           />
         </Routes>
