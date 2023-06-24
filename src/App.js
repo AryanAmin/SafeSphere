@@ -5,6 +5,7 @@ import Navigation from "./components/navigation/Navigation";
 import "./App.css";
 import RecommendFollowers from "./components/recommendFollowers/RecommendFollowers";
 import PostDetails from "./components/postDetails/postDetails";
+import "./backend/firebase";
 
 function App() {
   return (
@@ -22,11 +23,16 @@ function App() {
               </div>
             }
           />
-          <Route path="/post/:id" element={<div className="components-container">
+          <Route
+            path="/post/:id"
+            element={
+              <div className="components-container">
                 <Navigation />
                 <PostDetails />
                 <RecommendFollowers />
-              </div>} />
+              </div>
+            }
+          />
         </Routes>
       </Router>
     </div>
