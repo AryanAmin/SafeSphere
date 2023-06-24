@@ -12,6 +12,7 @@
     margin-right: 1rem;
   }
   .profile-card{
+    text-align: center;
     grid-area: profile-card;
     margin: 1rem 1rem;
     width: 100%;
@@ -33,15 +34,18 @@
   .Crypto-distrib{
     grid-area: Crypto-distrib;
     width: 100%;
-
   }
-  .Crypto-distrib-chart{
-    width:100%;
-    max-width:700px;
+  .Crypto-distrib canvas{
+    height: 60vh !important;
   }
   .NFT-distrib{
     grid-area: NFT-distrib;
     width: 100%;
+    text-align: right;
+  }
+  .NFT-distrib canvas{
+    height: 60vh !important;
+    margin-left: auto;
   }
   .posts{
     grid-area: posts;

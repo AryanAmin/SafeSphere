@@ -3,7 +3,7 @@ import {Pie} from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, Tooltip, Legend, ArcElement, Title);
 
-export default function CryptoPiechart(props){
+export default function NFTPiechart(props){
     const userData = {'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0': {
         labels: ['Mon','Tue','Wed'],
         datasets: [{
@@ -18,18 +18,17 @@ export default function CryptoPiechart(props){
         plugins: {
             title: {
                 display: true,
-                text: 'Coins owned',
+                text: 'NFTs owned',
                 align: "center",
                 color: "#ffffff",
                 font: {weight: 'bold'}
             },
             legend: {
-              position: 'right',
+              position: 'left',
               labels: {
                 usePointStyle: true,
                 pointStyle: 'circle',
                 color: "#ffffff",
-                
               }
             }
           }
@@ -37,6 +36,8 @@ export default function CryptoPiechart(props){
     return (<div>
         <Pie
         data={userData[props.userId]}
+        height={null}
+        width={null}
         options={options}
         >
 

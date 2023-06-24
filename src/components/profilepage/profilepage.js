@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import './profilepage.css';
 import ProfilePic from '../../assets/images/profile-pic.jpg';
 import CryptoPieChart from "./Crypto-piechart";
+import NFTPiechart from "./NFT-piechart";
 
 const userList = {
     '0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0': {userFName: 'John',
@@ -109,10 +110,10 @@ export default function Profilepage(props){
             </div>
         </div>
         <div class='Crypto-distrib'>
-            <CryptoPieChart />
+            <CryptoPieChart userId={props.userId}/>
         </div>
         <div class='NFT-distrib'>
-        Hi
+            <NFTPiechart userId={props.userId}/>
         </div>
         <div class='posts'>
         Hi
