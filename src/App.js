@@ -7,6 +7,7 @@ import "./App.css";
 import RecommendFollowers from "./components/recommendFollowers/RecommendFollowers";
 import PostDetails from "./components/postDetails/postDetails";
 import ProfilePage from "./components/profilepage/profilepage";
+import "./backend/firebase";
 
 function App() {
   return (

@@ -1,8 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Posts from "../posts/posts";
 import PostDetails from "../postDetails/postDetails";
 import { useNavigate } from "react-router";
+import { useStateValue } from "../../StateProvider";
+import {
+  getFirestore,
+  getDocs,
+  doc,
+  collection,
+  onSnapshot,
+} from "@firebase/firestore";
 
 const posts = [
   {
@@ -20,18 +28,41 @@ const posts = [
 ];
 
 function Home() {
+  const [{ user }] = useStateValue();
   const history = useNavigate();
+  const db = getFirestore();
+  const usersRef = collection(db, "users");
+
   const [selectedPost, setSelectedPost] = useState(null);
 
   const handlePostClick = (e, postCid) => {
     e.preventDefault();
-    history(`/post/${postCid}`)
+    history(`/post/${postCid}`);
   };
+
+  useEffect(() => {
+    // const userCollectionRef = doc(collection(db, "users"), "walletAddress");
+    // onSnapshot(userCollectionRef, (doc) => {
+    //   console.log("Doc Data: ", doc.data());
+    // });
+
+    const unsubscribe = onSnapshot(usersRef, (snapshot) => {
+      const allUsers = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+      console.log("All users: ", allUsers);
+    });
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <div className="home-container">
+      {user}
       <h1>Main Feed</h1>
-        <Posts posts={posts} onPostClick={handlePostClick} />
+      <Posts posts={posts} onPostClick={handlePostClick} />
     </div>
   );
 }
