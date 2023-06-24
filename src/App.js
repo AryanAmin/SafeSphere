@@ -5,6 +5,7 @@ import Navigation from "./components/navigation/Navigation";
 import "./App.css";
 import RecommendFollowers from "./components/recommendFollowers/RecommendFollowers";
 import PostDetails from "./components/postDetails/postDetails";
+import ProfilePage from "./components/profilepage/profilepage";
 
 function App() {
   return (
@@ -27,6 +28,12 @@ function App() {
                 <PostDetails />
                 <RecommendFollowers />
               </div>} />
+          <Route
+            path="/events/:id"
+            element={
+              <ProfilePage />
+            }
+          />
         </Routes>
       </Router>
     </div>
