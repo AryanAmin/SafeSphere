@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import Web3 from "web3";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import { actionTypes } from "../../Reducer";
+import { useStateValue } from "../../StateProvider";
 
 function Login() {
   const history = useNavigate();
   const [userAddress, setUserAddress] = useState("");
-
+  const [, dispatch] = useStateValue(); 
   const connectToMetaMask = async () => {
     if (typeof window.ethereum !== "undefined") {
       try {
@@ -19,13 +21,16 @@ function Login() {
         const address = accounts[0];
 
         setUserAddress(address); // Store user's address in state
-
+        dispatch({
+          type: actionTypes.SET_USER,
+          user: address,
+        });
         console.log("Connected to MetaMask");
         console.log("Web3 Version:", web3.version);
         console.log("User Address:", address);
 
         history("/");
-
+        
         // Continue with your logic or redirect to the authenticated area
       } catch (error) {
         console.error("Error connecting to MetaMask:", error);
