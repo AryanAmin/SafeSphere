@@ -12,7 +12,7 @@ function App() {
     <div>
       <Router>
         <Routes>
-        <Route
+          <Route
             path="/home"
             element={
               <div className="components-container">
@@ -32,9 +32,7 @@ function App() {
               </div>
             }
           />
-          <Route path="/" element={<Login />
-            }
-          />
+          <Route path="/" element={<Login />} />
         </Routes>
       </Router>
     </div>

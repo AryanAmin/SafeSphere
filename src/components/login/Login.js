@@ -5,19 +5,60 @@ import { useNavigate } from "react-router-dom";
 import { actionTypes } from "../../Reducer";
 import { useStateValue } from "../../StateProvider";
 
+import {
+  getFirestore,
+  getDocs,
+  setDoc,
+  doc,
+  collection,
+  onSnapshot,
+} from "@firebase/firestore";
+
 function Login() {
   const history = useNavigate();
+  const db = getFirestore();
+  const userRef = collection(db, "users");
+
+  const [{ completedOnboarding }] = useStateValue();
   const [userAddress, setUserAddress] = useState("");
   const [, dispatch] = useStateValue();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [formActivated, setFormActivated] = useState(false);
 
+  const { ethereum } = window;
+
+  useEffect(() => {
+    ethereum
+      .request({ method: "eth_accounts" })
+      .then((accounts) => {
+        if (accounts.length > 0) {
+          console.log("User is logged in and connected");
+          if (!completedOnboarding) {
+            const address = accounts[0];
+            setUserAddress(address); // Store user's address in state
+            dispatch({
+              type: actionTypes.SET_USER,
+              user: address,
+            });
+            setFormActivated(true);
+          } else {
+            history("/");
+          }
+        } else {
+          console.log("User is not logged in or connected");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
   const connectToMetaMask = async () => {
     if (typeof window.ethereum !== "undefined") {
       try {
         const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts"
+          method: "eth_requestAccounts",
         });
 
         const web3 = new Web3(window.ethereum);
@@ -26,7 +67,7 @@ function Login() {
         setUserAddress(address); // Store user's address in state
         dispatch({
           type: actionTypes.SET_USER,
-          user: address
+          user: address,
         });
 
         console.log("Connected to MetaMask");
@@ -53,7 +94,7 @@ function Login() {
     setLastName(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (firstName.trim() === "" || lastName.trim() === "") {
       alert("Please enter both Firstname and Lastname");
@@ -67,8 +108,19 @@ function Login() {
       lastName: lastName,
     };
 
-    // Perform further processing with the userData array as per your requirements
+    // Setting the new users into firebase database.
+    await setDoc(doc(userRef, userAddress), {
+      firstName: firstName,
+      lastName: lastName,
+      posts: [],
+    });
 
+    await dispatch({
+      type: actionTypes.SET_LOGGED_IN,
+      loggedIn: true,
+    });
+
+    // Perform further processing with the userData array as per your requirements
     console.log("User Data:", userData);
 
     // Navigate to the '/home' page
