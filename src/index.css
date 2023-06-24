@@ -2,6 +2,7 @@
 
 * {
   box-sizing: border-box;
+  margin: 0;
 }
 
 html {
@@ -9,7 +10,12 @@ html {
 }
 
 body {
-  margin: 0;
-  background-color: #3f3f3f;
+  background-color: black;
+  color: white;
 }
 
+:root{  
+  --primary-color: #0060c6;
+  --secondary-color: #ffffff;
+  --border-color: #8080808f
+}
