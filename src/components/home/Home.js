@@ -3,6 +3,7 @@ import "./Home.css";
 import Posts from "../posts/posts";
 import PostDetails from "../postDetails/postDetails";
 import { useNavigate } from "react-router";
+import { useStateValue } from "../../StateProvider";
 
 const posts = [
   {
@@ -20,6 +21,7 @@ const posts = [
 ];
 
 function Home() {
+  const [{user}] = useStateValue();
   const history = useNavigate();
   const [selectedPost, setSelectedPost] = useState(null);
 
@@ -30,6 +32,7 @@ function Home() {
 
   return (
     <div className="home-container">
+      {user}
       <h1>Main Feed</h1>
         <Posts posts={posts} onPostClick={handlePostClick} />
     </div>
