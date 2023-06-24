@@ -26,6 +26,12 @@ function fetchUserERC20Balance(userId){
     const axios = require('axios');
     const url = 'https://deep-index.moralis.io/api/v2/'+userId+'/erc20?chain=eth';
     let coin_balance = [];
+    const config = {
+        headers:{
+            'accept': 'application/json',
+            'X-API-Key': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImUyMGViYWVlLWJhZDEtNDBjNy1iNjNlLTMxYjRkY2I2MTMwOSIsIm9yZ0lkIjoiMzQ1MDc1IiwidXNlcklkIjoiMzU0NzMyIiwidHlwZUlkIjoiNjE3NjI2NWYtNjJlZS00ODA5LTgxOTYtMDAyNmZmMWQxOWY0IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE2ODc1ODcwNjcsImV4cCI6NDg0MzM0NzA2N30.Kozfsy8I9k-kTM3YnkSUKBJ_TmMbDHUruvIhyzhSPvk'
+        }
+      };
     axios.get(url, config)
         .then(res=> {
             for(let i =0; i < res.length; i++){
@@ -74,12 +80,13 @@ function fetchNativeTokenPrice(){
     return coin_balance;
 }
 
-export default function profilepage(){
-    const userId = useParams();
-    const userBalance = fetchUserCoinBalance(userId);
-    const userERC20Balance = fetchUserERC20Balance(userId);
-    const ERC20TokenPrice = fetchTokenPrice(userERC20Balance);
-    const nativeTokenPrice = fetchNativeTokenPrice(userId);
+export default function Profilepage(){
+    // const userId = useParams();
+    // const userBalance = fetchUserCoinBalance(userId);
+    // const userERC20Balance = fetchUserERC20Balance(userId);
+    // const ERC20TokenPrice = fetchTokenPrice(userERC20Balance);
+    // const nativeTokenPrice = fetchNativeTokenPrice(userId);
     
-    return ();
+
+    return (<div></div>);
 }

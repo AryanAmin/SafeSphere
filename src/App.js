@@ -29,9 +29,9 @@ function App() {
                 <RecommendFollowers />
               </div>} />
           <Route
-            path="/events/:id"
+            path="/profile"
             element={
-              <ProfilePage />
+              <ProfilePage userId={'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0'}/>
             }
           />
         </Routes>
