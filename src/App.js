@@ -34,9 +34,7 @@ function App() {
             element={<Fragment>
               <Navigation />
               <ProfilePage userId={'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0'}/>
-            </Fragment>  
-            }
-          />
+            </Fragment>} />
         </Routes>
       </Router>
     </div>
