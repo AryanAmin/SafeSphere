@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Posts from "../posts/posts";
-import PostDetails from "../postDetails/postDetails";
 import { useNavigate } from "react-router";
 import { useStateValue } from "../../StateProvider";
+import {NewPost} from '../newPost';
 import {
   getFirestore,
   getDocs,
@@ -62,7 +62,9 @@ function Home() {
     <div className="home-container">
       {user}
       <h1>Main Feed</h1>
+      <NewPost />
       <Posts posts={posts} onPostClick={handlePostClick} />
+       {/* Add the NewPost component */}
     </div>
   );
 }
