@@ -29,7 +29,7 @@ function Login() {
         console.log("Web3 Version:", web3.version);
         console.log("User Address:", address);
 
-        history("/");
+        history("/home");
         
         // Continue with your logic or redirect to the authenticated area
       } catch (error) {

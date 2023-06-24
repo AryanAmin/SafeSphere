@@ -11,9 +11,8 @@ function App() {
     <div>
       <Router>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/"
+        <Route
+            path="/home"
             element={
               <div className="components-container">
                 <Navigation />
@@ -22,11 +21,17 @@ function App() {
               </div>
             }
           />
-          <Route path="/post/:id" element={<div className="components-container">
+          <Route
+            path="/post/:id"
+            element={
+              <div className="components-container">
                 <Navigation />
                 <PostDetails />
                 <RecommendFollowers />
-              </div>} />
+              </div>
+            }
+          />
+          <Route path="/" element={<Login />} />
         </Routes>
       </Router>
     </div>
