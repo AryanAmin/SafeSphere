@@ -5,6 +5,7 @@ import CryptoPieChart from "./Crypto-piechart";
 import NFTPiechart from "./NFT-piechart";
 import { useQuery } from "@airstack/airstack-react";
 import { queryForPieChart } from "../../queries/queries";
+import { queryForNFTChart } from "../../queries/queries";
 import { useStateValue } from "../../StateProvider";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -101,61 +102,128 @@ function calculateTokenValue(tokenAmount, tokenDecimal, tokenPrice){
     return tokenValue;
 }
 
+
+
 export default function Profilepage(props){
-    const tokenNameArray = [];
-    const tokenValueArray = [];
-    const { data, loading, error } = useQuery(queryForPieChart);
+    const profileAddress = useParams().id;
+    const [tokenNameArray, setTokenNameArray] = useState([]);
+    const [tokenValueArray, setTokenValueArray] = useState([]);
+    const [nftNameArray, setNFTNameArray] = useState([]);
+    const [nftValueArray, setNFTValueArray] = useState([]);
+    const { data, loading, error } = useQuery(queryForPieChart(profileAddress));
+    const { data_NFT, loading_nft, error_nft } = useQuery(queryForNFTChart);
     const [{ user }] = useStateValue();
     const [tokens, setTokens] = useState([]);
-    const rugpulls = {'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0': 'ai-otherside'}
+    const [nfts, setNFTs] = useState([]);
+    const rugpulls = {'0x540cb04ebab67e05a620b97bb367ac5e4ed68f09': ['ai-otherside','ai-other']}
 
     useEffect(() => {
         if (data) {
-            const {ethereum, polygon} = data;
+            const {ethereum, polygon, ethereum_nft, polygon_nft} = data;
             const ethTokens = ethereum?.TokenBalance || [];
             const maticTokens = polygon?.TokenBalance || [];
-            setTokens((tokens) => [...tokens, ...ethTokens, ...maticTokens]);
+            const ethTokens_nft = ethereum_nft?.TokenBalance || [];
+            const maticTokens_nft = polygon_nft?.TokenBalance || [];
+            setTokens([...ethTokens, ...maticTokens]);
+            setNFTs([...ethTokens_nft, ...maticTokens_nft]);
+            // console.log("Eth tokens nft", ethTokens_nft);
+            console.log(data);
         }
     }, [data]);
+    useEffect(() => {
+        if (data_NFT) {
+            const {ethereum_nft, polygon_nft} = data;
+            const ethTokens_nft = ethereum_nft?.TokenBalance || [];
+            const maticTokens_nft = polygon_nft?.TokenBalance || [];
+            setNFTs([...ethTokens_nft, ...maticTokens_nft]);
+            console.log("Eth tokens nft", ethTokens_nft);
+            console.log(data_NFT);
+        }
+    }, [data_NFT]);
 
     useEffect(() => {
-        console.log("Tokens: ", tokens);
+        if (nfts.length > 0){
+            console.log("Length: ", nfts.length);
+            // setTokenNameArray([]);
+            // setTokenValueArray([]);
+            for(let i =0; i < nfts.length; i++){
+                console.log("Index: ", i, "Value: ", nfts.length);
+                setNFTNameArray((prevState) => [...prevState, nfts[i].token.name]);
+                setNFTValueArray((prevState) => [...prevState, nfts[i].amount.substring(0,5)]);
+                // console.log("nftNameArray: ", nftNameArray, "nftValueArray: ", nftValueArray);
+            }
+        }
+        console.log("nfts: ", nfts);
+    }, [nfts]);
+
+    useEffect(() => {
+        if (tokens.length > 0){
+            // console.log("Length: ", tokens.length);
+            // setTokenNameArray([]);
+            // setTokenValueArray([]);
+            for(let i =0; i < tokens.length; i++){
+                // console.log("Index: ", i, "Value: ", tokens.length);
+                setTokenNameArray((prevState) => [...prevState, tokens[i].token.name]);
+                setTokenValueArray((prevState) => [...prevState, tokens[i].amount.substring(0,5)]);
+                // console.log("tokenNameArray: ", tokenNameArray, "tokenValueArray: ", tokenValueArray);
+            }
+            // console.log("token value array",tokenValueArray);
+        }
+        // console.log("Tokens: ", tokens);
     }, [tokens]);
 
-    tokens.map((token) => tokenNameArray.push(token.name));
-    tokens.map((token) => tokenValueArray.push(calculateTokenValue(token.tokenAmount, token.tokenDecimal, fetchTokenPrice(token.tokenAddress))));
+    // useEffect(() => {
+    //     console.log("Token Name Array Length: ", tokenNameArray);
+    //     console.log("Token Name Array Length: ", tokenValueArray);
+    // }, [tokenNameArray, tokenValueArray])
+
+    useEffect(() => {
+        console.log("nft Name Array Length: ", nftNameArray);
+        console.log("nft value Array Length: ", nftValueArray);
+    }, [nftNameArray, nftValueArray]);
+
+    // tokens.map((token) => tokenNameArray.push(token.name));
+    // tokens.map((token) => tokenValueArray.push(calculateTokenValue(token.tokenAmount, token.tokenDecimal, fetchTokenPrice(token.tokenAddress))));
     // const userId = useParams();
     // const userBalance = fetchUserCoinBalance(userId);
     // const userERC20Balance = fetchUserERC20Balance(userId);
     // const ERC20TokenPrice = fetchTokenPrice(userERC20Balance);
     // const nativeTokenPrice = fetchNativeTokenP
-    const profileAddress = useParams().id;
+    
 
-    useEffect(()=>{ 
-        console.log("Profile Address: ", profileAddress);
-    },[profileAddress])
-
-    return (<div class="wrapper">
-        <div class='profile-card'>
-            <div class="profile-pic">
-            <img src={ProfilePic} alt="profile-pic"></img>
-            </div>
-            <div class="user-name">
-                Jane Doe
-            </div>
+    // useEffect(()=>{ 
+    //     console.log("Profile Address: ", profileAddress);
+    // },[profileAddress])
+    return (
+        <div class="wrapper">
+        {tokenNameArray.length < tokens.length || nftNameArray.length < nfts.length ? (
+            <h1>hello it is updating..</h1>
+        ):(
+            <>
+                <div class='profile-card'>
+                    <div class="profile-pic">
+                    <img src={ProfilePic} alt="profile-pic"></img>
+                    </div>
+                    <div class="user-name">
+                        Jane Doe
+                    </div>
+                </div>
+                <div class='Crypto-distrib'>
+                    <CryptoPieChart userId={profileAddress} coin_names={tokenNameArray} coin_prices={tokenValueArray}/>
+                </div>
+                <div class='NFT-distrib'>
+                    <NFTPiechart userId={profileAddress} coin_names={nftNameArray} coin_prices={nftValueArray}/>
+                </div>
+                <div class='user-warns'>
+                    <h3>Links to Rugpulls</h3>
+                    {rugpulls[profileAddress] !== undefined 
+                    ? rugpulls[profileAddress].map((address) => (
+                        <h3>{address}</h3>
+                    ))
+                    : 'All Clean!'}
+                </div>
+            </>
+        )}
         </div>
-        <div class='Crypto-distrib'>
-            <CryptoPieChart userId={profileAddress} coin_names={tokenNameArray} coin_prices={tokenValueArray}/>
-        </div>
-        <div class='NFT-distrib'>
-            <NFTPiechart userId={profileAddress} coin_names={tokenNameArray} coin_prices={tokenValueArray}/>
-        </div>
-        <div class='user-warns'>
-            <h3>Links to Rugpulls</h3>
-            {rugpulls[profileAddress] !== undefined ? rugpulls[profileAddress] : 'All Clean!'}
-        </div>
-        <div class='posts'>
-
-        </div>
-    </div>);
+    );
 }

@@ -1,13 +1,13 @@
 .wrapper {
     display: grid;
     gap: 10px;
-    grid-template-rows: auto 60vh auto;
-    grid-template-columns: 39% 39% 20%;
+    grid-template-rows: auto 80vh auto;
+    grid-template-columns: 49% 49%;
     justify-items: center;
     grid-template-areas:
-      "profile-card profile-card profile-card"
-      "Crypto-distrib NFT-distrib user-warns"
-      "posts posts posts";
+      "profile-card profile-card"
+      "Crypto-distrib NFT-distrib"
+      "user-warns user-warns";
     margin-left: 1rem;
     margin-right: 1rem;
   }
@@ -36,7 +36,7 @@
     width: 100%;
   }
   .Crypto-distrib canvas{
-    height: 60vh !important;
+    height: 80vh !important;
     margin-left: auto;
     margin-right: auto;
   }
@@ -46,7 +46,7 @@
     text-align: right;
   }
   .NFT-distrib canvas{
-    height: 60vh !important;
+    height: 80vh !important;
     margin-left: auto;
     margin-right: auto;
   }

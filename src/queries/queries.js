@@ -1,6 +1,70 @@
-export const queryForPieChart = `query queryPieChart {
-    ethereum: TokenBalances(
-      input: {filter: {owner: {_eq: "0x540cb04ebab67e05a620b97bb367ac5e4ed68f09"}, _and: {tokenType: {_eq: ERC20}}}, limit: 10, blockchain: ethereum}
+export const queryForPieChart = (address) => {
+  return `query queryPieChart {
+      ethereum: TokenBalances(
+        input: {filter: {owner: {_eq: "${address}"}, _and: {tokenType: {_eq: ERC20}}}, limit: 10, blockchain: ethereum}
+      ) {
+        TokenBalance {
+          amount
+          token {
+            name
+            symbol
+          }
+          tokenType
+          blockchain
+          tokenId
+          tokenAddress
+        }
+      }
+      polygon: TokenBalances(
+        input: {filter: {owner: {_eq: "${address}"}, _and: {tokenType: {_eq: ERC20}}}, limit: 10, blockchain: ethereum}
+      ) {
+        TokenBalance {
+          amount
+          token {
+            name
+            symbol
+          }
+          tokenType
+          blockchain
+          tokenId
+          tokenAddress
+        }    
+      }
+      ethereum_nft: TokenBalances(
+          input: {filter: {owner: {_eq: "${address}"}, _and: {tokenType: {_eq: ERC721}}}, limit: 10, blockchain: ethereum}
+        ) {
+          TokenBalance {
+            amount
+            token {
+              name
+              symbol
+            }
+            tokenType
+            blockchain
+            tokenId
+            tokenAddress
+          }
+        }
+      polygon_nft: TokenBalances(
+          input: {filter: {owner: {_eq: "${address}"}, _and: {tokenType: {_eq: ERC721}}}, limit: 10, blockchain: ethereum}
+        ) {
+          TokenBalance {
+            amount
+            token {
+              name
+              symbol
+            }
+            tokenType
+            blockchain
+            tokenId
+            tokenAddress
+          }    }
+    }`;
+}  
+
+  export const queryForNFTChart = `query queryNFTChart {
+    ethereum_nft: TokenBalances(
+      input: {filter: {owner: {_eq: "0x540cb04ebab67e05a620b97bb367ac5e4ed68f09"}, _and: {tokenType: {_eq: ERC721}}}, limit: 10, blockchain: ethereum}
     ) {
       TokenBalance {
         amount
@@ -14,8 +78,8 @@ export const queryForPieChart = `query queryPieChart {
         tokenAddress
       }
     }
-    polygon: TokenBalances(
-      input: {filter: {owner: {_eq: "0x540cb04ebab67e05a620b97bb367ac5e4ed68f09"}, _and: {tokenType: {_eq: ERC20}}}, limit: 10, blockchain: ethereum}
+    polygon_nft: TokenBalances(
+      input: {filter: {owner: {_eq: "0x540cb04ebab67e05a620b97bb367ac5e4ed68f09"}, _and: {tokenType: {_eq: ERC721}}}, limit: 10, blockchain: ethereum}
     ) {
       TokenBalance {
         amount

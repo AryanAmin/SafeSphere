@@ -148,7 +148,7 @@ function Login() {
 
   return (
     <div className="login-container">
-      <h1 className="safesphere-title">SafeSphere</h1>
+      <h1 className="safesphere-title">TradeSocial</h1>
       <div className="sphere-animation"></div>
       {formActivated ? (
         <form className="form-container" onSubmit={handleSubmit}>

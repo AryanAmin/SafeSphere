@@ -1,25 +1,25 @@
 import {Chart as ChartJS, ArcElement, CategoryScale, LinearScale, Tooltip, Legend, Title} from 'chart.js';
-import {Pie} from 'react-chartjs-2';
+import {Pie, Doughnut} from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, Tooltip, Legend, ArcElement, Title);
 
 export default function CryptoPiechart(props){
-    const userData = {'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0': {
-        labels: ['1inch', 'Shiba Inu', 'Aave'],
+    const userData = {
+        labels: props.coin_names,
         datasets: [{
-            data: [10,50,10],
-            backgroundColor: ['aqua','black','red'],
+            data: props.coin_prices,
+            backgroundColor: ['aqua','black','red','white','pink','yellow','green','blue','cyan', 'cerulean','beige','cream','orange','purple'],
             borderColor: 'white',
             borderWidth: 1
         }]
-    }}
+    }
     const options = {
         aspectRatio: 1,
         plugins: {
             title: {
-                display: true,
+                display: false,
                 text: 'Coins owned',
-                align: "center",
+                align: "left",
                 color: "#ffffff",
                 font: {weight: 'bold'}
             },
@@ -35,11 +35,11 @@ export default function CryptoPiechart(props){
           }
     };
     return (<div>
-        <Pie
-        data={userData[props.userId]}
+        <Doughnut
+        data={userData}
         options={options}
         >
 
-        </Pie>
+        </Doughnut>
     </div>);
 }
