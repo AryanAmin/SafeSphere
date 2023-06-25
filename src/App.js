@@ -27,9 +27,7 @@ function App() {
             path="/post/:id"
             element={
               <div className="components-container">
-                <Navigation />
                 <PostDetails />
-                <RecommendFollowers />
               </div>
             }
           />

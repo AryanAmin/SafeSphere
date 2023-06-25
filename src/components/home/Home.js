@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Posts from "../posts/posts";
 import { useNavigate } from "react-router";
-import { useStateValue } from "../../StateProvider";
+//import { useStateValue } from "../../StateProvider";
 import NewPost from '../newPost/NewPost';
 import {
   getFirestore,
@@ -28,7 +28,7 @@ const posts = [
 ];
 
 function Home() {
-  const [{ user }] = useStateValue();
+  //const [{ user }] = useStateValue();
   const history = useNavigate();
   const db = getFirestore();
   const usersRef = collection(db, "users");
@@ -60,7 +60,7 @@ function Home() {
 
   return (
     <div className="home-container">
-      {user}
+      {/* {user} */}
       <h1>Main Feed</h1>
       <NewPost />
       <Posts posts={posts} onPostClick={handlePostClick} />
