@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import "./Posts.css";
+import "./posts.css";
 import {
   getFirestore,
   collection,
@@ -14,8 +14,6 @@ const Posts = () => {
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
-  // const q = query(collection(db, "posts"), orderBy("timeStamps", "desc"));
 
   useEffect(() => {
     onSnapshot(postRef, (snapshot) => {
@@ -34,6 +32,10 @@ const Posts = () => {
     });
   }, []);
 
+  const handlePostClick = useCallback((postId) => {
+    window.location.href = `/postDetails/${postId}`;
+  }, []);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -44,9 +46,7 @@ const Posts = () => {
         <div
           className="post"
           key={post.id}
-          onClick={(e) => {
-            console.log("E VALUE: ", e);
-          }}
+          onClick={() => handlePostClick(post.id)}
         >
           <h2>{post.data.title}</h2>
           <p>{post.data.description}</p>
