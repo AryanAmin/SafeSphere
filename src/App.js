@@ -69,7 +69,7 @@ function App() {
             }
           />
           <Route
-            path="/post/:id"
+            path="/postdetails/:postId"
             element={
               <div className="components-container">
                 <PostDetails />
