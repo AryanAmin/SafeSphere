@@ -8,8 +8,41 @@ import PostDetails from "./components/postDetails/postDetails";
 import "./backend/firebase";
 import Profilepage from "./components/profilepage/profilepage";
 import Trending from "./components/trending/trending";
+import { useStateValue } from "./StateProvider";
+import { actionTypes } from "./Reducer";
+import { useEffect } from "react";
+import {init} from "@airstack/airstack-react";
+
+const AIRSTACK_API_KEY = 'f3c9e8e80a72463f916ef23092f3bf59';
+init(AIRSTACK_API_KEY);
 
 function App() {
+  const [{ user, completedOnboarding }] = useStateValue();
+  const [, dispatch] = useStateValue();
+  const { ethereum } = window;
+
+  useEffect(() => {
+    ethereum
+      .request({ method: "eth_accounts" })
+      .then((accounts) => {
+        if (accounts.length > 0) {
+          console.log("User is logged in and connected");
+          if (!completedOnboarding) {
+            const address = accounts[0];
+            dispatch({
+              type: actionTypes.SET_USER,
+              user: address,
+            });
+          }
+        } else {
+          console.log("User is not logged in or connected");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
   return (
     <div>
       <Router>
@@ -28,9 +61,7 @@ function App() {
             path="/post/:id"
             element={
               <div className="components-container">
-                <Navigation />
                 <PostDetails />
-                <RecommendFollowers />
               </div>
             }
           />
