@@ -46,8 +46,7 @@ function Navigation() {
       </div>
       <div>
         <h3>Hello this is a an asset</h3>
-        {
-          tokens ? 
+        {tokens ? (
           tokens.map((token) => (
             <Asset
               key={token.tokenId} // Add a unique key prop for each item in the list
@@ -60,10 +59,9 @@ function Navigation() {
               preset="medium"
             />
           ))
-          : (
-            <h3>Loading right now...</h3>
-          )
-        }
+        ) : (
+          <h3>Loading right now...</h3>
+        )}
       </div>
     </div>
   );
