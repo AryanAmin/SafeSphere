@@ -24,5 +24,16 @@
 .trending-body{
     margin: 1rem;
     grid-area: trending-body;
-    display: inline-block;
+    grid-template-rows: 10vh minmax(89vh, auto);
+    display: grid;
+    grid-template-areas:
+      "filter-bar"
+      "filtered-nfts";
+}
+.filter-bar{
+    float: right;
+    grid-area: filter-bar;
+}
+.filtered-nfts{
+    grid-area: filtered-nfts;
 }
