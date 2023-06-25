@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-import Posts from "../posts/Posts";
+import Posts from "../posts/posts";
 import { useNavigate } from "react-router";
 //import { useStateValue } from "../../StateProvider";
 import NewPost from "../newPost/NewPost";

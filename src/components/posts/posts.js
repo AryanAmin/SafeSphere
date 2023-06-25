@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import "./Posts.css";
+import "./posts.css";
 import {
   getFirestore,
   collection,
