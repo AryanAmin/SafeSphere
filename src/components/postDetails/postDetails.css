@@ -1,58 +1,57 @@
-.post-details-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 100vh;
+.vote-buttons {
+  margin-bottom: 10px;
 }
 
-.back-button {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background-color: #ffffff;
-  color: #000000;
-  border: none;
-  border-radius: 3px;
+.vote-button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.upvote {
+  background-color: green;
+  color: white;
+}
+
+.downvote {
+  background-color: red;
+  color: white;
+}
+
+.comment-form {
+  margin-bottom: 20px;
+}
+
+.comment-textarea {
+  width: 100%;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.comment-submit {
   padding: 5px 10px;
   cursor: pointer;
 }
 
-.post-content {
-  max-width: 600px;
-}
-
-.post-title {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-.post-description {
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.post-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 20px;
-}
-
-.info-item {
+.comment {
+  border: 1px solid #ccc;
+  padding: 10px;
   margin-bottom: 10px;
 }
 
-.comments-heading {
-  margin-bottom: 10px;
+.comment-text {
+  margin-bottom: 5px;
 }
 
-.comments-list {
-  list-style-type: none;
-  padding: 0;
+.comment-info {
+  font-size: 12px;
+  color: #888;
 }
 
-.comments-list li {
-  margin-bottom: 10px;
+.comment-author {
+  margin-right: 10px;
+}
+
+.comment-timestamp {
+  margin-left: 10px;
 }
