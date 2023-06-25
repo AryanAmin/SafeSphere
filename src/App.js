@@ -74,8 +74,8 @@ function App() {
             }
           />
           <Route path="/" element={<Login />} />
-          <Route path="/profile" element={
-          <Profilepage userId={'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0'}/>} />
+          <Route path="/profile/:id" element={
+          <Profilepage/>} />
         </Routes>
       </Router>
     </div>

@@ -3,6 +3,7 @@ import './profilepage.css';
 import ProfilePic from '../../assets/images/profile-pic.jpg';
 import CryptoPieChart from "./Crypto-piechart";
 import NFTPiechart from "./NFT-piechart";
+import { useEffect } from "react";
 
 const userList = {
     '0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0': {userFName: 'John',
@@ -92,13 +93,17 @@ function fetchNativeTokenPrice(){
     return coin_balance;
 }
 
-export default function Profilepage(props){
+export default function Profilepage(){
     // const userId = useParams();
     // const userBalance = fetchUserCoinBalance(userId);
     // const userERC20Balance = fetchUserERC20Balance(userId);
     // const ERC20TokenPrice = fetchTokenPrice(userERC20Balance);
     // const nativeTokenPrice = fetchNativeTokenPrice(userId);
-    const userId = props.userId;
+    const profileAddress = useParams().id;
+
+    useEffect(()=>{ 
+        console.log("Profile Address: ", profileAddress);
+    },[profileAddress])
 
     return (<div class="wrapper">
         <div class='profile-card'>
@@ -110,10 +115,10 @@ export default function Profilepage(props){
             </div>
         </div>
         <div class='Crypto-distrib'>
-            <CryptoPieChart userId={props.userId}/>
+            <CryptoPieChart userId={profileAddress}/>
         </div>
         <div class='NFT-distrib'>
-            <NFTPiechart userId={props.userId}/>
+            <NFTPiechart userId={profileAddress}/>
         </div>
         <div class='posts'>
         Hi
