@@ -3,7 +3,7 @@ import "./Home.css";
 import Posts from "../posts/posts";
 import { useNavigate } from "react-router";
 import { useStateValue } from "../../StateProvider";
-import {NewPost} from '../newPost';
+import NewPost from '../newPost/NewPost';
 import {
   getFirestore,
   getDocs,
