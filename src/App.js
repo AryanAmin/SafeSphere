@@ -47,14 +47,11 @@ function App() {
     <div>
       <Router>
         <Routes>
+
           <Route
             path="/trending"
             element={
-              <div className="components-container">
-                <Navigation />
                 <Trending />
-                <RecommendFollowers />
-              </div>
             }
           />
           <Route
@@ -68,7 +65,7 @@ function App() {
             }
           />
           <Route
-            path="/post/:id"
+            path="/postdetails/:postId"
             element={
               <div className="components-container">
                 <PostDetails />
@@ -76,9 +73,8 @@ function App() {
             }
           />
           <Route path="/" element={<Login />} />
-          <Route path="/trending" element={<Trending />} />
-          <Route path="/profile" element={
-          <Profilepage userId={'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0'}/>} />
+          <Route path="/profile/:id" element={
+          <Profilepage/>} />
         </Routes>
       </Router>
     </div>

@@ -128,7 +128,11 @@ export default function Profilepage(props){
     // const userERC20Balance = fetchUserERC20Balance(userId);
     // const ERC20TokenPrice = fetchTokenPrice(userERC20Balance);
     // const nativeTokenPrice = fetchNativeTokenPrice(userId);
-    const userId = props.userId;
+    const profileAddress = useParams().id;
+
+    useEffect(()=>{ 
+        console.log("Profile Address: ", profileAddress);
+    },[profileAddress])
 
     return (<div class="wrapper">
         <div class='profile-card'>
@@ -143,7 +147,7 @@ export default function Profilepage(props){
             <CryptoPieChart userId={props.userId} coin_names={tokenNameArray} coin_prices={tokenValueArray}/>
         </div>
         <div class='NFT-distrib'>
-            <NFTPiechart userId={props.userId}/>
+            <NFTPiechart userId={profileAddress}/>
         </div>
         <div class='posts'>
         Hi
