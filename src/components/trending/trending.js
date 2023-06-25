@@ -61,7 +61,7 @@ export default function Trending(){
             <DappFilter selected={dapp} onChangeFilter={onChangeDapp}/>
             </div>
             <div class='filtered-nfts'>
-                <NFTList items={filteredTrending}/>
+                <NFTList items={CollectionStat}/>
             </div>
             
         </div>
