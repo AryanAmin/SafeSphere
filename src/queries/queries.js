@@ -31,7 +31,7 @@ export const queryForPieChart = `query queryPieChart {
   }`;
 
 export const queryForTrending = (daapName, _gt = 1) => {
-  if (daapName !== "blur" || daapName !== "opensea" || daapName !== "rarible") {
+  if (daapName === "blur" || daapName === "opensea" || daapName === "rarible") {
     return `query NFTCollectionSales {
       trending: CollectionStats(
         input: {filter: {lowestSalePriceInUSDC: {_gt: ${_gt}}, dappName: {_eq: ${daapName}}}, blockchain: ethereum, timeFrame: DAILY, order: {totalSaleVolumeInUSDC: DESC, lastTransactionBlockTimestamp: DESC}, limit: 20}
