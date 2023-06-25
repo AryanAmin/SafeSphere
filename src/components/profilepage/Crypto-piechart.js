@@ -5,9 +5,9 @@ ChartJS.register(CategoryScale, LinearScale, Tooltip, Legend, ArcElement, Title)
 
 export default function CryptoPiechart(props){
     const userData = {'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0': {
-        labels: ['Mon','Tue','Wed'],
+        labels: ['1inch', 'Shiba Inu', 'Aave'],
         datasets: [{
-            data: [3,6,9],
+            data: [10,50,10],
             backgroundColor: ['aqua','black','red'],
             borderColor: 'white',
             borderWidth: 1

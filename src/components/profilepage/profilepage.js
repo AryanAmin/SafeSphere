@@ -8,6 +8,7 @@ import { queryForPieChart } from "../../queries/queries";
 import { useStateValue } from "../../StateProvider";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import WarnsList from "./WarnsList";
 
 const userList = {
     '0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0': {userFName: 'John',
@@ -58,7 +59,6 @@ function fetchUserERC20Balance(userId){
         .catch(err=> console.log(err))
     return coin_balance;
 }
-
 function fetchTokenPrice(userBalance){
     // const axios = require('axios');
     let url = '';
@@ -107,6 +107,7 @@ export default function Profilepage(props){
     const { data, loading, error } = useQuery(queryForPieChart);
     const [{ user }] = useStateValue();
     const [tokens, setTokens] = useState([]);
+    const rugpulls = {'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0': 'ai-otherside'}
 
     useEffect(() => {
         if (data) {
@@ -127,7 +128,7 @@ export default function Profilepage(props){
     // const userBalance = fetchUserCoinBalance(userId);
     // const userERC20Balance = fetchUserERC20Balance(userId);
     // const ERC20TokenPrice = fetchTokenPrice(userERC20Balance);
-    // const nativeTokenPrice = fetchNativeTokenPrice(userId);
+    // const nativeTokenPrice = fetchNativeTokenP
     const profileAddress = useParams().id;
 
     useEffect(()=>{ 
@@ -144,13 +145,17 @@ export default function Profilepage(props){
             </div>
         </div>
         <div class='Crypto-distrib'>
-            <CryptoPieChart userId={props.userId} coin_names={tokenNameArray} coin_prices={tokenValueArray}/>
+            <CryptoPieChart userId={profileAddress} coin_names={tokenNameArray} coin_prices={tokenValueArray}/>
         </div>
         <div class='NFT-distrib'>
-            <NFTPiechart userId={profileAddress}/>
+            <NFTPiechart userId={profileAddress} coin_names={tokenNameArray} coin_prices={tokenValueArray}/>
+        </div>
+        <div class='user-warns'>
+            <h3>Links to Rugpulls</h3>
+            {rugpulls[profileAddress] !== undefined ? rugpulls[profileAddress] : 'All Clean!'}
         </div>
         <div class='posts'>
-        Hi
+
         </div>
     </div>);
 }

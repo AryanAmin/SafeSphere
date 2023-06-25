@@ -5,9 +5,9 @@ ChartJS.register(CategoryScale, LinearScale, Tooltip, Legend, ArcElement, Title)
 
 export default function NFTPiechart(props){
     const userData = {'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0': {
-        labels: ['Mon','Tue','Wed'],
+        labels: ['NFT Gurus','Secret Society','Wonderpals'],
         datasets: [{
-            data: [3,6,9],
+            data: [3,2,3],
             backgroundColor: ['aqua','black','red'],
             borderColor: 'white',
             borderWidth: 1
