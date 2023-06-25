@@ -7,6 +7,7 @@ import RecommendFollowers from "./components/recommendFollowers/RecommendFollowe
 import PostDetails from "./components/postDetails/postDetails";
 import "./backend/firebase";
 import Profilepage from "./components/profilepage/profilepage";
+import Trending from "./components/trending/trending";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             }
           />
           <Route path="/" element={<Login />} />
+          <Route path="/trending" element={<Trending />} />
           <Route path="/profile" element={
           <Profilepage userId={'0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0'}/>} />
         </Routes>

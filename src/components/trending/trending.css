@@ -1,0 +1,28 @@
+.wrapper-trending {
+    display: grid;
+    gap: 10px;
+    grid-template-rows: 10vh minmax(89vh, auto);
+    grid-template-columns: 30% auto;
+    grid-template-areas:
+      "nav-bar search-bar"
+      "nav-bar trending-body";
+    margin: 1rem 1rem;
+}
+.nav-bar{
+    grid-area: nav-bar;
+}
+.search-bar-div{
+    margin: 1rem;
+    grid-area: search-bar;
+    display: inline-block;
+}
+.search-bar{
+    width: 50%;
+    height: 50%;
+    margin: 0.5rem 1rem;
+}
+.trending-body{
+    margin: 1rem;
+    grid-area: trending-body;
+    display: inline-block;
+}
