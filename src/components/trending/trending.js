@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Trending.css";
+import "./trending.css";
 import { useNavigate } from "react-router";
 import {
   useGetTokenBalances,

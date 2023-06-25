@@ -1,6 +1,7 @@
-export const queryForPieChart = `query queryPieChart {
+export const queryForNFTChart = (userAccount) => { 
+  return `query queryPieChart {
     ethereum: TokenBalances(
-      input: {filter: {owner: {_eq: "0x540cb04ebab67e05a620b97bb367ac5e4ed68f09"}, _and: {tokenType: {_eq: ERC721}}}, limit: 10, blockchain: ethereum}
+      input: {filter: {owner: {_eq: "${userAccount}"}, _and: {tokenType: {_eq: ERC721}}}, limit: 10, blockchain: ethereum}
     ) {
       TokenBalance {
         amount
@@ -15,7 +16,7 @@ export const queryForPieChart = `query queryPieChart {
       }
     }
     polygon: TokenBalances(
-      input: {filter: {owner: {_eq: "0x540cb04ebab67e05a620b97bb367ac5e4ed68f09"}, _and: {tokenType: {_eq: ERC721}}}, limit: 10, blockchain: ethereum}
+      input: {filter: {owner: {_eq: "${userAccount}"}, _and: {tokenType: {_eq: ERC721}}}, limit: 10, blockchain: ethereum}
     ) {
       TokenBalance {
         amount
@@ -28,7 +29,44 @@ export const queryForPieChart = `query queryPieChart {
         tokenId
         tokenAddress
       }    }
-  }`;
+  }`
+};
+
+  export const queryForPieChart = () => {
+    // console.log("Query getting buil...");
+    return `query queryPieChart {
+      ethereum: TokenBalances(
+        input: {filter: {owner: {_eq: "0x540cb04ebab67e05a620b97bb367ac5e4ed68f09"}, _and: {tokenType: {_eq: ERC20}}}, limit: 10, blockchain: ethereum}
+      ) {
+        TokenBalance {
+          amount
+          token {
+            name
+            symbol
+          }
+          tokenType
+          blockchain
+          tokenId
+          tokenAddress
+        }
+      }
+      polygon: TokenBalances(
+        input: {filter: {owner: {_eq: "0x540cb04ebab67e05a620b97bb367ac5e4ed68f09"}, _and: {tokenType: {_eq: ERC20}}}, limit: 10, blockchain: ethereum}
+      ) {
+        TokenBalance {
+          amount
+          token {
+            name
+            symbol
+          }
+          tokenType
+          blockchain
+          tokenId
+          tokenAddress
+        }    }
+    }`;
+
+  } 
 
 export const queryForTrending = (daapName, _gt = 1) => {
   if (daapName === "blur" || daapName === "opensea" || daapName === "rarible") {

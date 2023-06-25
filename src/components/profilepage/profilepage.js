@@ -102,18 +102,19 @@ function calculateTokenValue(tokenAmount, tokenDecimal, tokenPrice){
 }
 
 export default function Profilepage(props){
+    const [{ user }] = useStateValue();
+    const { data, loading, error } = useQuery(queryForPieChart());
+    const [tokens, setTokens] = useState([]);
     const tokenNameArray = [];
     const tokenValueArray = [];
-    const { data, loading, error } = useQuery(queryForPieChart);
-    const [{ user }] = useStateValue();
-    const [tokens, setTokens] = useState([]);
+    const profileAddress = useParams().id;
 
     useEffect(() => {
         if (data) {
             const {ethereum, polygon} = data;
             const ethTokens = ethereum?.TokenBalance || [];
             const maticTokens = polygon?.TokenBalance || [];
-            setTokens((tokens) => [...tokens, ...ethTokens, ...maticTokens]);
+            // setTokens((tokens) => [...tokens, ...ethTokens, ...maticTokens]);
         }
     }, [data]);
 
@@ -122,19 +123,20 @@ export default function Profilepage(props){
     }, [tokens]);
 
     tokens.map((token) => tokenNameArray.push(token.name));
-    tokens.map((token) => tokenValueArray.push(calculateTokenValue(token.tokenAmount, token.tokenDecimal, fetchTokenPrice(token.tokenAddress))));
+    // tokens.map((token) => tokenValueArray.push(calculateTokenValue(token.tokenAmount, token.tokenDecimal, fetchTokenPrice(token.tokenAddress))));
+    tokens.forEach((token) => tokenValueArray.push(calculateTokenValue(token.tokenAmount, token.tokenDecimal, fetchTokenPrice(token.tokenAddress))));
     // const userId = useParams();
     // const userBalance = fetchUserCoinBalance(userId);
     // const userERC20Balance = fetchUserERC20Balance(userId);
     // const ERC20TokenPrice = fetchTokenPrice(userERC20Balance);
     // const nativeTokenPrice = fetchNativeTokenPrice(userId);
-    const profileAddress = useParams().id;
 
     useEffect(()=>{ 
         console.log("Profile Address: ", profileAddress);
     },[profileAddress])
 
-    return (<div class="wrapper">
+    return (
+    <div class="wrapper">
         <div class='profile-card'>
             <div class="profile-pic">
             <img src={ProfilePic} alt="profile-pic"></img>
@@ -144,7 +146,7 @@ export default function Profilepage(props){
             </div>
         </div>
         <div class='Crypto-distrib'>
-            <CryptoPieChart userId={props.userId} coin_names={tokenNameArray} coin_prices={tokenValueArray}/>
+            <CryptoPieChart userId={profileAddress} coin_names={tokenNameArray} coin_prices={tokenValueArray}/>
         </div>
         <div class='NFT-distrib'>
             <NFTPiechart userId={profileAddress}/>
@@ -152,5 +154,6 @@ export default function Profilepage(props){
         <div class='posts'>
         Hi
         </div>
-    </div>);
+    </div>
+    );
 }
