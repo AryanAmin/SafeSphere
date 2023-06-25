@@ -1,61 +1,51 @@
-import React, { useState } from "react";
+import React from "react";
 import "./postDetails.css";
-import { useParams } from "react-router";
 
-const PostDetails = () => {
-  const postCid = useParams().id;
-  const [isLoading, setIsLoading] = useState(false);
-  const [comments, setComments] = useState([]);
-
-  // Simulating fetching comments for the post
-  const fetchComments = async () => {
-    setIsLoading(true);
-    try {
-      // Simulating an API call to fetch comments
-      const response = await fetch(`/api/comments?postId=${postCid}`);
-      const data = await response.json();
-      setComments(data);
-    } catch (error) {
-      console.error("Error fetching comments:", error);
-    } finally {
-      setIsLoading(false);
-    }
+function PostDetails() {
+  const post = {
+    title: "Example Post Title",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    walletAddress: "0x123456789",
+    timestamp: "June 24, 2023",
+    totalVotes: 10,
+    comments: [
+      { id: 1, text: "Comment 1" },
+      { id: 2, text: "Comment 2" },
+    ],
   };
 
-  const handlePostListener = (e) => {
-    console.log("Cid: ", postCid);
-    fetchComments();
+  const handleGoBack = () => {
+    window.history.back();
   };
 
   return (
-    <div className="post-details">
-      <h2>CID: {postCid}</h2>
-      {/* <div className="post" onClick={handlePostListener}>
-        <h2>{post.title}</h2>
-        <p>{post.body}</p>
-        <div className="author">Posted by {post.author}</div>
+    <div className="post-details-container">
+      <button className="back-button" onClick={handleGoBack}>
+        Back
+      </button>
+      <div className="post-content">
+        <h1 className="post-title">{post.title}</h1>
+        <p className="post-description">{post.description}</p>
+        <div className="post-info">
+          <div className="info-item">
+            <strong>Wallet Address:</strong> {post.walletAddress}
+          </div>
+          <div className="info-item">
+            <strong>Timestamp:</strong> {post.timestamp}
+          </div>
+          <div className="info-item">
+            <strong>Total Votes:</strong> {post.totalVotes}
+          </div>
+        </div>
       </div>
-      {isLoading ? (
-        <div>Loading comments...</div>
-      ) : (
-        <div className="comments">
-          <h3>Comments</h3>
-          {comments.length > 0 ? (
-            comments.map((comment) => (
-              <div className="comment" key={comment.id}>
-                <p>{comment.body}</p>
-                <div className="comment-author">
-                  Comment by {comment.author}
-                </div>
-              </div>
-            ))
-          ) : (
-            <div>No comments found.</div>
-          )}
-        </div> */}
-      {/* )} */}
+      <h2 className="comments-heading">Comments</h2>
+      <ul className="comments-list">
+        {post.comments.map((comment) => (
+          <li key={comment.id}>{comment.text}</li>
+        ))}
+      </ul>
     </div>
   );
-};
+}
 
 export default PostDetails;

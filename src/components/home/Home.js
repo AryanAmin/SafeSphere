@@ -2,9 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./Home.css";
 import Posts from "../posts/Posts";
 import { useNavigate } from "react-router";
-import { useStateValue } from "../../StateProvider";
+//import { useStateValue } from "../../StateProvider";
 import NewPost from "../newPost/NewPost";
-import { getFirestore, collection, onSnapshot } from "@firebase/firestore";
+import {
+  getFirestore,
+  getDocs,
+  doc,
+  collection,
+  onSnapshot,
+} from "@firebase/firestore";
 
 const posts = [
   {
@@ -22,7 +28,7 @@ const posts = [
 ];
 
 function Home() {
-  const [{ user }] = useStateValue();
+  //const [{ user }] = useStateValue();
   const history = useNavigate();
   const db = getFirestore();
   const usersRef = collection(db, "users");
@@ -49,6 +55,8 @@ function Home() {
 
   return (
     <div className="home-container">
+      {/* {user} */}
+      <h1>Main Feed</h1>
       <NewPost />
       <Posts />
     </div>
