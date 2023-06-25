@@ -1,70 +1,35 @@
-import Navigation from "../navigation/Navigation";
-import { useNavigate } from "react-router";
-import {useState} from 'react';
-import './trending.css';
-import DappFilter from "./DappFilter";
-import NFTList from './NFTList';
+import React, { useEffect, useState } from "react";
+import "./Trending.css";
+import {
+  useGetTokenBalances,
+  useLazyQueryWithPagination,
+  useQuery,
+} from "@airstack/airstack-react";
+import { useStateValue } from "../../StateProvider";
+import { queryForPieChart, queryForTrending } from "../../queries/queries";
 
-export default function Trending(){
-    const history = useNavigate();
-    const [dapp, setDapp] = useState('opensea');
+function Trending() {
+  const { data, loading, error } = useQuery(queryForTrending("opensea"));
+  const [{ user }] = useStateValue();
+  const [trendingTokens, setTrendingTokens] = useState([]);
 
-    const onChangeDapp = (selectedDapp) => {
-        setDapp(selectedDapp);
+  useEffect(() => {
+    if (data) {
+      const { trending } = data;
+      const trendingCollection = trending?.CollectionStat || [];
+      setTrendingTokens((tokens) => [...tokens, ...trendingCollection]);
     }
+  }, [data]);
 
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        history(`/profile/${e.target.fname.value}`);
-    }
-    const CollectionStat = [{
-        "dappName": "blur",
-        "totalSaleVolumeInUSDC": 18153.19741397,
-        "lastTransactionBlockTimestamp": "2023-06-24T05:30:11Z",
-        "token": {
-          "name": "Moonbirds"
-        }
-    },
-    {
-        "dappName": "opensea",
-        "totalSaleVolumeInUSDC": 18153.19741397,
-        "lastTransactionBlockTimestamp": "2023-06-24T05:30:11Z",
-        "token": {
-          "name": "Sun"
-        }
-    },
-    {
-        "dappName": "rarible",
-        "totalSaleVolumeInUSDC": 18153.19741397,
-        "lastTransactionBlockTimestamp": "2023-06-24T05:30:11Z",
-        "token": {
-          "name": "Star"
-        }
-    }];
+  useEffect(() => {
+    console.log("Trending Tokens information: ", trendingTokens);
+  }, [trendingTokens]);
 
-    const filteredTrending = CollectionStat.filter((e) => {
-        return e.dappName === dapp;
-    });
-    return (
-        <div class="wrapper-trending">
-        <div class="nav-bar">
-            <Navigation />
-        </div>
-        <div class="search-bar-div">
-            <form onSubmit={onSubmitHandler}>
-                <input class="search-bar"type="text" id="fname" name="fname" />
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
-        <div class="trending-body">
-            <div class='filter-bar'>
-            <DappFilter selected={dapp} onChangeFilter={onChangeDapp}/>
-            </div>
-            <div class='filtered-nfts'>
-                <NFTList items={CollectionStat}/>
-            </div>
-            
-        </div>
-        </div>
-    );
+  return (
+    <div className="home-container">
+      <h1>Trending</h1>
+    </div>
+  );
 }
+
+export default Trending;
