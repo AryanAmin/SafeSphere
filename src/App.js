@@ -6,6 +6,10 @@ import "./App.css";
 import RecommendFollowers from "./components/recommendFollowers/RecommendFollowers";
 import PostDetails from "./components/postDetails/postDetails";
 import "./backend/firebase";
+import {init} from "@airstack/airstack-react";
+
+const AIRSTACK_API_KEY = 'f3c9e8e80a72463f916ef23092f3bf59';
+init(AIRSTACK_API_KEY);
 
 function App() {
   return (
