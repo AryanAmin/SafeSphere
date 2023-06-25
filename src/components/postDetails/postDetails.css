@@ -1,48 +1,58 @@
-.post-details {
-    margin-top: 20px;
-  }
-  
-  .post {
-    cursor: pointer;
-    background-color: #010101;
-    padding: 10px;
-    border-radius: 5px;
-  }
-  
-  .post h2 {
-    margin-top: 0;
-  }
-  
-  .post p {
-    margin-bottom: 10px;
-  }
-  
-  .author {
-    color: gray;
-    font-style: italic;
-  }
-  
-  .comments {
-    margin-top: 20px;
-  }
-  
-  .comments h3 {
-    margin-bottom: 10px;
-  }
-  
-  .comment {
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-  }
-  
-  .comment p {
-    margin: 0;
-  }
-  
-  .comment-author {
-    color: gray;
-    font-style: italic;
-  }
-  
+.post-details-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100vh;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.post-content {
+  max-width: 600px;
+}
+
+.post-title {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.post-description {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.post-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.info-item {
+  margin-bottom: 10px;
+}
+
+.comments-heading {
+  margin-bottom: 10px;
+}
+
+.comments-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comments-list li {
+  margin-bottom: 10px;
+}
