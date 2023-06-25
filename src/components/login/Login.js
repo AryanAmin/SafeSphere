@@ -113,6 +113,7 @@ function Login() {
       firstName: firstName,
       lastName: lastName,
       posts: [],
+      followers: {} // Address: Timestamps
     });
 
     await dispatch({
