@@ -10,6 +10,10 @@ import Profilepage from "./components/profilepage/profilepage";
 import { useStateValue } from "./StateProvider";
 import { actionTypes } from "./Reducer";
 import { useEffect } from "react";
+import {init} from "@airstack/airstack-react";
+
+const AIRSTACK_API_KEY = 'f3c9e8e80a72463f916ef23092f3bf59';
+init(AIRSTACK_API_KEY);
 
 function App() {
   const [{ user, completedOnboarding }] = useStateValue();
