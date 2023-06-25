@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-import Posts from "../posts/posts";
+import Posts from "../posts/Posts";
 import { useNavigate } from "react-router";
 //import { useStateValue } from "../../StateProvider";
-import NewPost from '../newPost/NewPost';
+import NewPost from "../newPost/NewPost";
 import {
   getFirestore,
   getDocs,
@@ -41,11 +41,6 @@ function Home() {
   };
 
   useEffect(() => {
-    // const userCollectionRef = doc(collection(db, "users"), "walletAddress");
-    // onSnapshot(userCollectionRef, (doc) => {
-    //   console.log("Doc Data: ", doc.data());
-    // });
-
     const unsubscribe = onSnapshot(usersRef, (snapshot) => {
       const allUsers = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -63,8 +58,7 @@ function Home() {
       {/* {user} */}
       <h1>Main Feed</h1>
       <NewPost />
-      <Posts posts={posts} onPostClick={handlePostClick} />
-       {/* Add the NewPost component */}
+      <Posts />
     </div>
   );
 }
