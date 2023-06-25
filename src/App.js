@@ -11,9 +11,10 @@ import Trending from "./components/trending/trending";
 import { useStateValue } from "./StateProvider";
 import { actionTypes } from "./Reducer";
 import { useEffect } from "react";
-import {init} from "@airstack/airstack-react";
+import { init } from "@airstack/airstack-react";
+import Trending from "./components/trending/Trending";
 
-const AIRSTACK_API_KEY = 'f3c9e8e80a72463f916ef23092f3bf59';
+const AIRSTACK_API_KEY = "f3c9e8e80a72463f916ef23092f3bf59";
 init(AIRSTACK_API_KEY);
 
 function App() {
@@ -47,6 +48,16 @@ function App() {
     <div>
       <Router>
         <Routes>
+          <Route
+            path="/trending"
+            element={
+              <div className="components-container">
+                <Navigation />
+                <Trending />
+                <RecommendFollowers />
+              </div>
+            }
+          />
           <Route
             path="/home"
             element={
