@@ -1,86 +1,96 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getFirestore, collection, onSnapshot, updateDoc, serverTimestamp, doc } from "firebase/firestore";
 import "./RecommendFollowers.css";
+import { useStateValue } from "../../StateProvider";
+import { useNavigate } from "react-router";
 
 function RecommendFollowers() {
-  const followers = [
-    {
-      walletAddress: "0x123456789",
-      firstName: "John",
-      lastName: "Doe",
-    },
-    {
-      walletAddress: "0x987654321",
-      firstName: "Jane",
-      lastName: "Smith",
-    },
-    {
-      walletAddress: "0x123456789",
-      firstName: "John",
-      lastName: "Doe",
-    },
-    {
-      walletAddress: "0x123456789",
-      firstName: "John",
-      lastName: "Doe",
-    },
-    {
-      walletAddress: "0x123456789",
-      firstName: "John",
-      lastName: "Doe",
-    },
-    {
-      walletAddress: "0x123456789",
-      firstName: "John",
-      lastName: "Doe",
-    },
-    {
-      walletAddress: "0x123456789",
-      firstName: "John",
-      lastName: "Doe",
-    },
-    {
-      walletAddress: "0x123456789",
-      firstName: "John",
-      lastName: "Doe",
-    },
-    // Add more dummy followers here
-    // ...
-  ];
+  const [{user}] = useStateValue();
 
-  const onHandlePress = (follower) => {
-    // Handle the action when follow button or name link is pressed
-    // For example, you can navigate to a specific route using window.location.href
-    // Customize the navigation logic according to your requirements
-    console.log("Clicked on follower:", follower);
-    window.location.href = "/profile/" + follower.walletAddress;
-    // Replace the above line with your desired navigation logic
-  };
+  const [followers, setFollowers] = useState([]);
+  const db = getFirestore();
+  const history = useNavigate();
+  const followersCollection = collection(db, "users");
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(followersCollection, (snapshot) => {
+      const fetchedFollowers = snapshot.docs.map((doc) => ({
+          id: doc.id, data: doc.data()}));
+      setFollowers(fetchedFollowers);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [followersCollection]);
+
+  const followHandlerListner = async (e, follower) =>  {
+    e.preventDefault();
+
+    // Following a person for the first time.
+    await updateDoc(doc(collection(db, "users"), user), {
+      followers: {
+        [follower.id]: serverTimestamp()
+      }
+    }).then(async() => {
+      await updateDoc(doc(collection(db, "users"), follower.id), {
+        followers: {
+          [user]: serverTimestamp()
+        }
+      })
+    })
+
+  }
+
+  const profileClickHandler = (follower) => {
+    history(`/profile/${follower.id}`)
+  }
+
+  const alreadyFriendCheck = (follower) => {
+    // Check if the current users wallet address is in the follower dictionary
+    console.log("Follower already check: ", follower);
+  }
+
+  // const onHandlePress = async (follower) => {
+  //   console.log("Clicked on follower:", follower);  
+
+  //   await updateDoc(currentUserDocRef, {
+  //     followers: {
+  //       [follower.id]: serverTimestamp()
+  //     }
+  //   })
+
+  //   // window.location.href = "/profile/" + follower.id;
+  // };
 
   return (
     <div className="recommendedFollowers-container">
-      <h1>Follower</h1>
+      <h1>Followers</h1>
       <div className="followers-list">
-        {followers.map((follower, index) => (
-          <div key={index} className="follower-card">
-            <div className="follower-details">
-              <div className="wallet-address">{follower.walletAddress}</div>
-              <div className="name">
-                <a
-                  href="#"
-                  onClick={() => onHandlePress(follower)}
-                >
-                  {follower.firstName} {follower.lastName}
-                </a>
-              </div>
-              <button
-                className="follow-button"
-                onClick={() => onHandlePress(follower)}
-              >
-                Follow
-              </button>
-            </div>
-          </div>
-        ))}
+        {followers.map((follower, index) => {
+          return(
+            <>
+              {(follower.data.followers[user] === undefined && follower.id !== user)&& (
+                <div key={index} className="follower-card">
+                  <div className="follower-details">
+                    <div className="wallet-address">{follower.id}</div>
+                    <div className="name">
+                      <a href="#" onClick={() => profileClickHandler(follower)}>
+                        {follower.data.firstName} {follower.data.lastName}
+                      </a>
+                    </div>
+                    <button
+                      className="follow-button"
+                      onClick={(e) => followHandlerListner(e, follower)}
+                    >
+                      Follow
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
+          )
+        })}
       </div>
     </div>
   );
