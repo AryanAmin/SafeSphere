@@ -2,12 +2,12 @@
     display: grid;
     gap: 10px;
     grid-template-rows: auto 60vh auto;
-    grid-template-columns: 49% 49%;
+    grid-template-columns: 39% 39% 20%;
     justify-items: center;
     grid-template-areas:
-      "profile-card profile-card"
-      "Crypto-distrib NFT-distrib"
-      "posts posts";
+      "profile-card profile-card profile-card"
+      "Crypto-distrib NFT-distrib user-warns"
+      "posts posts posts";
     margin-left: 1rem;
     margin-right: 1rem;
   }
@@ -53,4 +53,8 @@
   .posts{
     grid-area: posts;
 
+  }
+  .user-warns{
+    grid-area: user-warns;
+    color: red;
   }
