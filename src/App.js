@@ -7,12 +7,11 @@ import RecommendFollowers from "./components/recommendFollowers/RecommendFollowe
 import PostDetails from "./components/postDetails/postDetails";
 import "./backend/firebase";
 import Profilepage from "./components/profilepage/profilepage";
-// import Trending from "./components/trending/trending";
 import { useStateValue } from "./StateProvider";
 import { actionTypes } from "./Reducer";
 import { useEffect } from "react";
 import { init } from "@airstack/airstack-react";
-import Trending from "./components/trending/Trending";
+import Trending from "./components/trending/trending";
 
 const AIRSTACK_API_KEY = "f3c9e8e80a72463f916ef23092f3bf59";
 init(AIRSTACK_API_KEY);

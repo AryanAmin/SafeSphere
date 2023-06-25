@@ -3,7 +3,11 @@ import './profilepage.css';
 import ProfilePic from '../../assets/images/profile-pic.jpg';
 import CryptoPieChart from "./Crypto-piechart";
 import NFTPiechart from "./NFT-piechart";
-import { useEffect } from "react";
+import { useQuery } from "@airstack/airstack-react";
+import { queryForPieChart } from "../../queries/queries";
+import { useStateValue } from "../../StateProvider";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const userList = {
     '0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0': {userFName: 'John',
@@ -14,7 +18,7 @@ const userList = {
 }
 
 function fetchUserCoinBalance(userAddress){
-    const axios = require('axios');
+    // const axios = require('axios');
     const coins_list = ['eth', 'matic'];
     const config = {
         headers:{
@@ -36,7 +40,7 @@ function fetchUserCoinBalance(userAddress){
 }
 
 function fetchUserERC20Balance(userId){
-    const axios = require('axios');
+    // const axios = require('axios');
     const url = 'https://deep-index.moralis.io/api/v2/'+userId+'/erc20?chain=eth';
     let coin_balance = [];
     const config = {
@@ -56,7 +60,7 @@ function fetchUserERC20Balance(userId){
 }
 
 function fetchTokenPrice(userBalance){
-    const axios = require('axios');
+    // const axios = require('axios');
     let url = '';
     let coin_balance = [];
     const config = {
@@ -65,15 +69,13 @@ function fetchTokenPrice(userBalance){
             'X-API-Key': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6ImUyMGViYWVlLWJhZDEtNDBjNy1iNjNlLTMxYjRkY2I2MTMwOSIsIm9yZ0lkIjoiMzQ1MDc1IiwidXNlcklkIjoiMzU0NzMyIiwidHlwZUlkIjoiNjE3NjI2NWYtNjJlZS00ODA5LTgxOTYtMDAyNmZmMWQxOWY0IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE2ODc1ODcwNjcsImV4cCI6NDg0MzM0NzA2N30.Kozfsy8I9k-kTM3YnkSUKBJ_TmMbDHUruvIhyzhSPvk'
         }
       };
-    for(let i = 0; i < userBalance.length; i++){
-        url = 'https://deep-index.moralis.io/api/v2/erc20/'+userBalance[i][1]+'/price?chain=eth';
-        axios.get(url, config)
-            .then(res=> {
-                coin_balance.append([userBalance[i][0],res.usdPrice])
-            })
-            .catch(err=> console.log(err))
-    }
-    return coin_balance;
+    url = 'https://deep-index.moralis.io/api/v2/erc20/'+userBalance+'/price?chain=eth';
+    axios.get(url, config)
+        .then(res=> {
+            return res.usdPrice
+        })
+        .catch(err=> console.log(err))
+    // return coin_balance;
 }
 
 function fetchNativeTokenPrice(){
@@ -93,7 +95,34 @@ function fetchNativeTokenPrice(){
     return coin_balance;
 }
 
-export default function Profilepage(){
+function calculateTokenValue(tokenAmount, tokenDecimal, tokenPrice){
+    const noOfTokens = +tokenAmount / Math.pow(10, tokenDecimal);
+    const tokenValue = noOfTokens * tokenPrice;
+    return tokenValue;
+}
+
+export default function Profilepage(props){
+    const tokenNameArray = [];
+    const tokenValueArray = [];
+    const { data, loading, error } = useQuery(queryForPieChart);
+    const [{ user }] = useStateValue();
+    const [tokens, setTokens] = useState([]);
+
+    useEffect(() => {
+        if (data) {
+            const {ethereum, polygon} = data;
+            const ethTokens = ethereum?.TokenBalance || [];
+            const maticTokens = polygon?.TokenBalance || [];
+            setTokens((tokens) => [...tokens, ...ethTokens, ...maticTokens]);
+        }
+    }, [data]);
+
+    useEffect(() => {
+        console.log("Tokens: ", tokens);
+    }, [tokens]);
+
+    tokens.map((token) => tokenNameArray.push(token.name));
+    tokens.map((token) => tokenValueArray.push(calculateTokenValue(token.tokenAmount, token.tokenDecimal, fetchTokenPrice(token.tokenAddress))));
     // const userId = useParams();
     // const userBalance = fetchUserCoinBalance(userId);
     // const userERC20Balance = fetchUserERC20Balance(userId);
@@ -115,7 +144,7 @@ export default function Profilepage(){
             </div>
         </div>
         <div class='Crypto-distrib'>
-            <CryptoPieChart userId={profileAddress}/>
+            <CryptoPieChart userId={props.userId} coin_names={tokenNameArray} coin_prices={tokenValueArray}/>
         </div>
         <div class='NFT-distrib'>
             <NFTPiechart userId={profileAddress}/>
