@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import './postDetails.css';
+import "./postDetails.css";
 import { useParams } from "react-router";
 
 const PostDetails = () => {
   const postCid = useParams().id;
-    const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [comments, setComments] = useState([]);
-  
 
   // Simulating fetching comments for the post
   const fetchComments = async () => {
@@ -30,7 +29,7 @@ const PostDetails = () => {
 
   return (
     <div className="post-details">
-        <h2>CID: {postCid}</h2>
+      <h2>CID: {postCid}</h2>
       {/* <div className="post" onClick={handlePostListener}>
         <h2>{post.title}</h2>
         <p>{post.body}</p>
